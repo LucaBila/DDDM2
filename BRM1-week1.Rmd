@@ -1,0 +1,225 @@
+---
+title: 'BRM1 IBA 2022: Week 1'
+author: "Team 77 - Luca van Kooten 2694883 & Obe Quispel 2708003"
+date: 
+output: pdf_document
+---
+`r Sys.Date()`
+Here I set the directory, please change this to the folder in which you store your files and R project!
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#knitr::opts_knit$set(root.dir = 'D:/Data/Dropbox/Meike/BRM1_IBA_2022/Assignments/')
+setwd("~/Documents/University Desktop/BRM1/BRM_WEEK1")
+```
+
+# Before you start
+
+Before you start, set up your environment. Choose a working directory (i.e. folder) that makes sense, and make sure that everytime you start a new assignment, you clean out your environment:
+- `getwd()` to check your working directory
+- `setwd()` to change working directory
+- `?setwd` to learn more
+
+*It is very important you download the Rmarkdown file in this directory, and do NOT change its name! Use this location to store your R project. The data file should be the same folder. Write your code inside the functions you'll find below.Do NOT delete these functions!*
+
+Please see my instruction video on [how to set up a working directory and using Rproject](https://www.youtube.com/watch?v=iwNo4H0M8VA). In this video you can learn more about [Rmarkdown](https://www.youtube.com/watch?v=xccC42Ojwg8).
+
+install.packages("knitr")
+install.packages("rmarkdown")
+install.packages("rticles")  
+install.packages("tinytex")
+
+tinytex::install_tinytex()
+Below you can see a R chunk in which I check my directory and empty my environment.
+
+```{r}
+# write your code here
+getwd() # check working directory
+rm(list=ls()) 
+"You only need to remove the objects in your environment when you are working in R, not when you are knitting (it starts from an empty environment anyway)."
+```
+
+## Example working with Rmd file
+```{r}
+# here i create two random variables
+x <- rnorm(100)
+y <- rnorm(100)
+# here i inspect these variables
+summary(x)
+summary(y)
+# and plot them
+plot(x,y, col="red")
+```
+
+## Handing in the assignment and your solutions
+
+By the end of the week you are required to hand in this .Rmd file **as a pdf** and **as a .r File**. To do this, you need to `Knit` the document (see on top to your left next to the save button). The resulting pdf file has to be handed in via canvas. We will inspect the quality of the R code in this file. Note that your code will be checked on plagiarism.
+
+\textcolor{red}{Next to your R markdown file, hand in your answers via the excel sheet} (do this for all questions!). You can find the excel sheet in folder Assignment/Week1 on canvas. Your solutions will be automatically graded, so be precise with numbers! I will check on three decimals. Fill in your solutions on the `INPUT` sheet, but check them via the `OUTPUT` sheet. 
+
+
+## 1. Inspect missings
+
+Read data file into the R environment (`sep = ','`). Do NOT change the name so when we grade your code we know that this is the dataset you've analyzed. Save data in an R object. Please see my instruction video on [how to read a csv file](https://www.youtube.com/watch?v=06mHtMSlITs).
+
+```{r}
+# write your code here
+CYP <- read.csv("CYP_KGZ.csv", sep = ",")
+GP <- read.csv("EastGermany_Portsmouth.csv", sep = ",")
+
+
+```
+
+Use the appropriate commands you've learned last year: `head`, `tail`,`str`, `colnames`,`summary`. To understand what the variable codes mean, look into the questionnaire and the codebook of WVS.
+```{r}
+# write your code here
+# Inspection of the variables with different R commands
+summary(CYP)
+head(CYP)
+tail(CYP)
+str(CYP)
+colnames(CYP)
+
+summary(GP)
+head(GP)
+tail(GP)
+str(GP)
+colnames(GP)
+
+```
+What is the type of the R object you've created? Choose among: **Scalar, logical vector, numeric vector, character vector, matrix, or a dataframe**. 
+
+How many observations you have per country? use `table`. Inspect how many missings you have per country for the whole data file. To do this, use `na.omit`, `nrows` and indexing to select the rows per country. Please see my instruction video on [indexing](https://www.youtube.com/watch?v=U1gSAE0nzyw).
+```{r}
+question_1 <- function() {
+   # write your code here
+   # use print() around your table command so it is shown in output below
+}
+question_1()
+```
+
+## 2. Inspect education
+Inspect both the recoded and original education level of the spouse of the respondent `Q276` and `Q276R`. How is the recoded education level constructed? Create a cross-tabulation to inspect how the variables overlap. Report the most common *recoded* education level in the data. How is the spouse's education level related to the education level of the respondent? Inspect their correlation and `use="complete.obs"`. 
+```{r}
+question_2_a <- function() {
+   # write your code here
+   # use print() around your commands so it is shown in output below
+}
+question_2_a()
+```
+
+It might be that the correlation between the respondent and her/his spouse depends on gender measured by `Q260`. Please inspect the correlation separately for men and women, and calculate the absolute difference using `abs`. Use indexing to select only men or women. Report two decimals.
+```{r}
+question_2_b <- function() {
+  # write your code here
+  # make sure you end with the absolute difference
+  # so this is printed in your output
+}
+question_2_b()
+```
+
+## 3. Satisfaction financial situation
+Inspect satisfaction with the financial situation of the household measured by `Q50` using `summary` and `sd`. What is the mean and standard deviation per country? What is the mean score and standard deviation per country? Rewatch my video on [indexing](https://www.youtube.com/watch?v=U1gSAE0nzyw).
+```{r}
+question_3_a <- function() {
+   # write your code here
+   # use print() around your commands so they are shown in output below
+}
+question_3_a()
+
+```
+
+What is the mean level of financial satisfaction for each of the spouse *recoded* education level? Use `tapply`. Please see my video on [tapply]().
+```{r}
+question_3_b <- function() {
+   # write your code here
+}
+question_3_b()
+
+```
+
+## 4. Country differences in emancipation
+Inspect variable `Q30`. Make sure you understand what a 1 and what a 4 means. What is the mean of *University is more important for a boy than for a girl* per country? Which country scores higher on emancipation? Use `tapply`. Inspect whether this country also scores higher on the average *recoded* education level of the spouse by using `tapply` again. 
+```{r}
+question_4 <- function() {
+  # write your code here
+  # use print() around your tapply commands so it is shown in output below
+}
+question_4()
+```
+
+## 5. Measurement levels
+Both variables under 3) and 4) are represented by numbers. However, numbers can be interpreted at different levels. What is the measurement level of emancipation? What is the measurement level of satisfaction financial situation? Choose among: **Continuous, interval, ordinal or nominal**.
+
+## 6. Plot
+First plot satisfaction of the financial situation `Q50` using a histogram by the function `hist`. Then plot the emancipation variable analyzed under 4 using a barplot. Use `barplot` and `table`.
+
+```{r}
+question_6_a <- function() {
+  # write your code here
+  # use print() around your commands so it is shown in output below
+}
+question_6_a()
+
+```
+
+Now plot the satisfaction financial situation per emancipation level in one plot. 
+*Note*. Depending on the measurement level selected under 5) only a few plots are appropriate!
+```{r}
+question_6_b <- function() {
+  # write your code here
+}
+question_6_b()
+
+```
+
+## 7. Country plots
+How do the countries differ in how satisfied people are with their financial situation given their age measured by `Q262`? Create two plots, one for each country. Put the plots next to one another using `par(mfrow=c(1,2))`. Use `plot` from the base R, and put age on the y-axis. Make nice with the correct labels for the axes, and put the country name in the title.
+```{r}
+par(mfrow=c(1,2))
+question_7 <- function() {
+  # write your code here
+  # save your plots in an r object
+  # use print() to make sure these plots are shown in output below
+}
+question_7()
+
+```
+
+## 8. Scatterplot using ggplot2
+Plot the age measured by `Q262` with financial situation satisfaction `Q50` in one plot. Make sure that age is on x-axis. Use `ggplot` and add a line using `geom_smooth(method="lm")`. Color the observations by country (both specify under `aes` and `geom_point`. 
+```{r}
+library(ggplot2)
+
+question_8 <- function() {
+  
+  # write your code here
+  # save your plot in an r object
+  # repeat for each country
+  # use print() to make sure these plots are shown in output below
+}
+question_8()
+
+```
+**************************************************************************************
+
+## KNIT RMARKDOWN TO PDF FILE TO UPLOAD TO CANVAS
+When you're ready, and you know for sure there are no mistakes in your code, you can try to knit the document. Knitting means that you run all the code chunks consecutively, so what is created in one code chunk might be used in the following chunk. 
+
+If you run into problems, please check the following:
+* Do not use the function install.packages() inside your code (only once to install the package). If you include install.packages, R will try to find a connection and install the package while knitting.
+* If you use functions from packages, you need to install this package before knitting, and use the function library() to be able to use them while knitting
+* Make sure the data and variables names you use, are consistent throughout
+* Check your output after you knitted!
+Please see my instruction video about [knitting](https://www.youtube.com/watch?v=uM-lA3K7wmo).
+
+**************************************************************************************
+
+## CREATE .R FILE TO UPLOAD TO CANVAS
+When you're done with the assignment, please run the following code in the console (the window in which commands and output are printed) to obtain the R document:
+
+knitr::purl("./BRM1-week1.Rmd")
+
+Note that the . represents your current working directory, so make sure the .Rmd file is located in this directory. The R file will be located in the same folder as your R project.
+
+**************************************************************************************
